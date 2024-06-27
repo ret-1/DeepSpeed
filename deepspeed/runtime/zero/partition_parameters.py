@@ -494,7 +494,7 @@ class InsertPostInitMethodToModuleSubClasses(object):
                 print_rank_0(f'Before initializing {module.__class__.__name__}', force=False)
 
                 is_child_module = False
-                if not hasattr(module, "_ds_child_entered"):
+                if not (module.__dict__ and hasattr(module, "_ds_child_entered")):
                     # child's __init__ was called, since parents all see the same object they can now skip post_init
                     is_child_module = True
                     setattr(module, "_ds_child_entered", True)
